@@ -1,0 +1,253 @@
+[
+	{
+		"name": "Ayutthaya",
+		"filename": "ayutthaya.jpg",
+		"flag": "Thailand.png",
+		"type": [
+			"Capture the Flag"
+		]
+	},
+	{
+		"name": "Black Forest",
+		"filename": "black-forest.jpg",
+		"flag": "Germany.png",
+		"type": [
+			"Elimination",
+			"Team Deathmatch"
+		]
+	},
+	{
+		"name": "Blizzard World",
+		"filename": "blizzard-world.jpg",
+		"flag": "USA.png",
+		"type": [
+			"Hybrid"
+		]
+	},
+	{
+		"name": "Busan",
+		"filename": "busan.jpg",
+		"flag": "Korea.png",
+		"type": [
+			"Control"
+		]
+	},
+	{
+		"name": "Castillo",
+		"filename": "castillo.jpg",
+		"flag": "Mexico.png",
+		"type": [
+			"Elimination",
+			"Team Deathmatch"
+		]
+	},
+	{
+		"name": "Château Guillard",
+		"filename": "chateau-guillard.jpg",
+		"flag": "Mexico.png",
+		"type": [
+			"Deathmatch",
+			"Team Deathmatch"
+		]
+	},
+	{
+		"name": "Dorado",
+		"filename": "dorado.jpg",
+		"flag": "Mexico.png",
+		"type": [
+			"Deathmatch",
+			"Escort",
+			"Team Deathmatch"
+		]
+	},
+	{
+		"name": "Ecopoint: Antarctica",
+		"filename": "ecopoint-antarctica.jpg",
+		"flag": "OW.png",
+		"type": [
+			"Elimination",
+			"Team Deathmatch"
+		]
+	},
+	{
+		"name": "Eichenwalde",
+		"filename": "eichenwalde.jpg",
+		"flag": "Germany.png",
+		"type": [
+			"Deathmatch",
+			"Hybrid",
+			"Team Deathmatch"
+		]
+	},
+	{
+		"name": "Hanamura",
+		"filename": "hanamura.jpg",
+		"flag": "Japan.png",
+		"type": [
+			"Assault"
+		]
+	},
+	{
+		"name": "Havana",
+		"filename": "havana.jpg",
+		"flag": "Cuba.png",
+		"type": [
+			"Escort"
+		]
+	},
+	{
+		"name": "Hollywood",
+		"filename": "hollywood.jpg",
+		"flag": "USA.png",
+		"type": [
+			"Hybrid",
+			"Deathmatch",
+			"Team Deathmatch"
+		]
+	},
+	{
+		"name": "Horizon Lunar Colony",
+		"filename": "horizon-lunar-colony.jpg",
+		"flag": "Moon.png",
+		"type": [
+			"Assault"
+		]
+	},
+	{
+		"name": "Ilios",
+		"filename": "ilios.jpg",
+		"flag": "Greece.png",
+		"type": [
+			"Control",
+			"Capture the Flag"
+		]
+	},
+	{
+		"name": "Junkertown",
+		"filename": "junkertown.jpg",
+		"flag": "Australia.png",
+		"type": [
+			"Escort"
+		]
+	},
+	{
+		"name": "Kanezaka",
+		"filename": "kanezaka.jpg",
+		"flag": "Japan.png",
+		"type": [
+			"Deathmatch",
+			"Team Deathmatch"
+		]
+	},
+	{
+		"name": "King's Row",
+		"filename": "kings-row.jpg",
+		"flag": "UK.png",
+		"type": [
+			"Deathmatch",
+			"Hybrid",
+			"Team Deathmatch"
+		]
+	},
+	{
+		"name": "Lijiang Tower",
+		"filename": "lijiang-tower.jpg",
+		"flag": "China.png",
+		"type": [
+			"Control",
+			"Capture the Flag"
+		]
+	},
+	{
+		"name": "Necropolis",
+		"filename": "necropolis.jpg",
+		"flag": "Egypt.png",
+		"type": [
+			"Elimination",
+			"Team Deathmatch"
+		]
+	},
+	{
+		"name": "Nepal",
+		"filename": "nepal.jpg",
+		"flag": "Nepal.png",
+		"type": [
+			"Control",
+			"Capture the Flag"
+		]
+	},
+	{
+		"name": "Numbani",
+		"filename": "numbani.jpg",
+		"flag": "Nigeria.png",
+		"type": [
+			"Hybrid"
+		]
+	},
+	{
+		"name": "Oasis",
+		"filename": "oasis.jpg",
+		"flag": "Iraq.png",
+		"type": [
+			"Control",
+			"Capture the Flag"
+		]
+	},
+	{
+		"name": "Paris",
+		"filename": "paris.jpg",
+		"flag": "France.png",
+		"type": [
+			"Assault"
+		]
+	},
+	{
+		"name": "Petra",
+		"filename": "petra.jpg",
+		"flag": "Jordan.png",
+		"type": [
+			"Deathmatch",
+			"Team Deathmatch"
+		]
+	},
+	{
+		"name": "Rialto",
+		"filename": "rialto.jpg",
+		"flag": "Italy.png",
+		"type": [
+			"Escort"
+		]
+	},
+	{
+		"name": "Route 66",
+		"filename": "route-66.jpg",
+		"flag": "USA.png",
+		"type": [
+			"Escort"
+		]
+	},
+	{
+		"name": "Temple of Anubis",
+		"filename": "temple-of-anubis.jpg",
+		"flag": "Egypt.png",
+		"type": [
+			"Assault"
+		]
+	},
+	{
+		"name": "Volskaya Industries",
+		"filename": "volskaya-industries.jpg",
+		"flag": "Russia.png",
+		"type": [
+			"Assault"
+		]
+	},
+	{
+		"name": "Watchpoint: Gibraltar",
+		"filename": "watchpoint-gibraltar.jpg",
+		"flag": "OW.png",
+		"type": [
+			"Escort"
+		]
+	}
+]
