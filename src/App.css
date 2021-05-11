@@ -122,19 +122,18 @@ h1
 	background-color: white;
 	margin: 10px;
 	box-sizing: border-box;
-	box-shadow: 1px 1px 2px 0px #d4d4d4;
 	transition: all 0.25s;
 	vertical-align: top;
 }
 
-.DisplayMap:hover img.map
-{
-	
-}
-
-.DisplayMap:hover
+.DisplayMap:not(.full):hover
 {
 	box-shadow: 2px 2px 2px 0px #979797;
+}
+
+.DisplayMap:not(.full)
+{
+	box-shadow: 1px 1px 2px 0px #d4d4d4;
 }
 
 .DisplayMap.full
@@ -231,7 +230,8 @@ h1
     z-index: 100;
 }
 
-.DisplayMapCurtain {
+.DisplayMapCurtain
+{
     position: fixed;
     top: 0px;
     left: 0px;

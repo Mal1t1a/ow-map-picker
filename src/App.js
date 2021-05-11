@@ -476,6 +476,9 @@ class App extends React.Component
 					<Filters ref={this.state.filtersRef} SetMaps={this.SetMaps} Maps={this.state.originalmaps} visible={this.state.isShowingFilters} />
 				</div>
 				{this.state.maps}
+				<footer>
+					<h2>Made by: <a href="https://www.twitch.tv/mal1t1a">Mal1t1a</a> with <a href="https://reactjs.org/">React</a></h2>
+				</footer>
 			</div>
 		);
 	}
