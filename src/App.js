@@ -1,3 +1,9 @@
+/*
+	Todo:
+		Reset maps should reset the maps with the filters enabled
+		Only show maps with the filters enabled by default
+*/
+
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
@@ -100,9 +106,26 @@ class DisplayMap extends React.Component
 	{
 		super(props);
 		this.handleClick = this.handleClick.bind(this);
+		this.setVisible = this.setVisible.bind(this);
+		this.setInvisible = this.setInvisible.bind(this);
 		this.state = {
-			full: false
+			full: false,
+			visible: true
 		};
+	}
+
+	setVisible()
+	{
+		this.setState({
+			visible: true
+		});
+	}
+
+	setInvisible()
+	{
+		this.setState({
+			visible: false
+		});
 	}
 
 	handleClick(e)
@@ -112,17 +135,46 @@ class DisplayMap extends React.Component
 		});
 	}
 
-	render()
+	small()
 	{
 		return (
-			<div className={"DisplayMap" + (this.state.full ? " full" : "")} onClick={this.handleClick}>
-				<img src={"./imgs/maps/" + (this.state.full ? "" : "thumbnails/") + this.props.map.filename} />
+			<div className={"DisplayMap" + (this.state.visible ? "" : " hidden")} onClick={this.handleClick}>
+				<div className="map-container">
+					<img className="map" src={"./imgs/maps/thumbnails/" + this.props.map.filename} />
+				</div>
 				<div className="subtitle">
 					<FlagDisplay flag={this.props.map.flag} />{this.props.map.name}
 					<Gamemode gamemodes={this.props.map.type} />
 				</div>
 			</div>
 		);
+	}
+
+	full()
+	{
+		return (
+			<div className="DisplayMapCurtain" onClick={this.handleClick}>
+				<div className="DisplayMap full">
+					<div className="btnClose">X</div>
+					<div className="map-container">
+						<img className="map" src={"./imgs/maps/" + this.props.map.filename} />
+					</div>
+					<div className="subtitle">
+						<FlagDisplay flag={this.props.map.flag} />{this.props.map.name}
+						<Gamemode gamemodes={this.props.map.type} />
+					</div>
+				</div>
+			</div>
+		);
+	}
+
+	render()
+	{
+		var res = [];
+		res.push(this.small());
+		if (this.state.full)
+			res.push(this.full());
+		return (res);
 	}
 }
 
@@ -172,6 +224,9 @@ class Filters extends React.Component
 	{
 		super(props);
 		this.onCheckChanged = this.onCheckChanged.bind(this);
+		this.onButtonCheckAllClicked = this.onButtonCheckAllClicked.bind(this);
+		this.onButtonUncheckAllClicked = this.onButtonUncheckAllClicked.bind(this);
+		this.onButtonCompetitiveOnlyClicked = this.onButtonCompetitiveOnlyClicked.bind(this);
 		this.state = {
 			filters: [
 				{
@@ -213,35 +268,82 @@ class Filters extends React.Component
 	onCheckChanged(e)
 	{
 		var oldmaps = this.props.Maps;
-		var maps = [];
 		var filters = this.state.filters;
-		for (var x in filters)
+
+		if (e != null)
 		{
-			if (filters[x].name == e.target.value)
+			for (var x in filters)
 			{
-				filters[x].checked = e.target.checked;
+				if (filters[x].name == e.target.value)
+				{
+					filters[x].checked = e.target.checked;
+				}
 			}
 		}
-		for (var x in filters)
+
+		for (var x in oldmaps)
 		{
-			if (filters[x].checked)
+			oldmaps[x].ref.current.setInvisible();
+			for (var y in filters)
 			{
-				for (var y in oldmaps)
+				if (filters[y].checked)
 				{
-					if (oldmaps[y].props.map.type.includes(filters[x].name))
+					if (oldmaps[x].props.map.type.includes(filters[y].name))
 					{
-						if (!maps.includes(oldmaps[y]))
-						{
-							maps.push(oldmaps[y]);
-						}
+						oldmaps[x].ref.current.setVisible();
 					}
 				}
 			}
 		}
-		this.props.SetMaps(maps);
+		//this.props.SetMaps(oldmaps);
 		this.setState({
 			filters: filters
 		});
+	}
+
+	onButtonCheckAllClicked(e)
+	{
+		var filters = this.state.filters;
+		for (var x in filters)
+		{
+			filters[x].checked = true;
+		}
+		this.setState({
+			filters: filters
+		});
+		this.onCheckChanged();
+	}
+
+	onButtonUncheckAllClicked(e)
+	{
+		var filters = this.state.filters;
+		for (var x in filters)
+		{
+			filters[x].checked = false;
+		}
+		this.setState({
+			filters: filters
+		});
+		this.onCheckChanged();
+	}
+
+	onButtonCompetitiveOnlyClicked(e)
+	{
+		var filters = this.state.filters;
+		var compOnly = [
+			"Control",
+			"Hybrid",
+			"Assault",
+			"Escort"
+		];
+		for (var x in filters)
+		{
+			filters[x].checked = compOnly.includes(filters[x].name);
+		}
+		this.setState({
+			filters: filters
+		});
+		this.onCheckChanged();
 	}
 
 	render()
@@ -253,6 +355,9 @@ class Filters extends React.Component
 		return (
 			<div className={"Filters" + (this.props.visible ? "" : " hidden")}>
 				<h3>Select which map types you want to see</h3>
+				<OrangeButton name="Check All" onClick={this.onButtonCheckAllClicked} />
+				<OrangeButton name="Uncheck All" onClick={this.onButtonUncheckAllClicked} />
+				<BlueButton name="Competitive Only" onClick={this.onButtonCompetitiveOnlyClicked} />
 				{inputs}
 			</div>
 		);
@@ -296,7 +401,8 @@ class App extends React.Component
 			originalmaps: [],
 			maps: [],
 			hasShuffled: false,
-			isShowingFilters: false
+			isShowingFilters: false,
+			filtersRef: React.createRef()
 		};
 	}
 
@@ -310,14 +416,12 @@ class App extends React.Component
 	onButtonResetMapsClicked(e)
 	{
 		e.preventDefault();
-		var maps = this.state.mapsjobj.map((map) =>
-		{
-			return <DisplayMap map={map} key={map.name} />;
-		});
+		var maps = this.state.originalmaps.slice();
 		this.SetMaps(maps);
 		this.setState({
 			hasShuffled: false
 		});
+		this.state.filtersRef.current.onCheckChanged();
 	}
 
 	onButtonShuffleClicked(e)
@@ -346,13 +450,15 @@ class App extends React.Component
 		.then(jobj => {
 			var maps = jobj.map((map) =>
 			{
-				return <DisplayMap map={map} key={map.name} />;
+				var newRef = React.createRef();
+				return <DisplayMap ref={newRef} map={map} key={map.name} />;
 			});
 			this.setState({
 				mapsjobj: jobj,
 				originalmaps: maps,
 				maps: maps
 			});
+			this.state.filtersRef.current.onCheckChanged();
 		});
 	}
 
@@ -360,13 +466,14 @@ class App extends React.Component
 	{
 		return (
 			<div className="App">
+				<header>
+					<h1>Overwatch Map Picker</h1>
+				</header>
 				<div className="controls">
 					{this.state.hasShuffled ? <OrangeButton name="Reset Maps" onClick={this.onButtonResetMapsClicked} /> : ''}
 					<OrangeButton name="Shuffle Button" onClick={this.onButtonShuffleClicked} />
-				</div>
-				<div className="filters-container">
 					<BlueButton name={this.state.isShowingFilters ? "Hide Filters" : "Show Filters"} onClick={this.onButtonToggleFiltersClicked} />
-					<Filters SetMaps={this.SetMaps} Maps={this.state.originalmaps} visible={this.state.isShowingFilters} />
+					<Filters ref={this.state.filtersRef} SetMaps={this.SetMaps} Maps={this.state.originalmaps} visible={this.state.isShowingFilters} />
 				</div>
 				{this.state.maps}
 			</div>
